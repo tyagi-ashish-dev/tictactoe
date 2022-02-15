@@ -8,13 +8,12 @@ class Game extends React.Component{
         this.state = {
             squares: Array(9).fill(null),
             chance: true,
-            
+            gameOver: 0
         }
     }
-    gameOver=false;
 
     handleclick=(i)=>{
-       if(this.gameOver)
+       if(this.state.gameOver>0)
           return;
        var squares = this.state.squares;
        var chance = this.state.chance;
@@ -36,13 +35,21 @@ class Game extends React.Component{
             }
         );
        }
-       this.calculateWinner()
+
+       let winner = this.calculateWinner();
+       if(winner>0)
+       {
+           this.setState(
+               {gameOver:winner}
+               ); 
+        }
+
     }
-    /* check val for rows
-     */
+   
     calculateWinner=()=>{
 
         const squares = this.state.squares;
+        var w = 0;
         const Winner = [
             [0,1,2],
             [3,4,5],
@@ -53,18 +60,27 @@ class Game extends React.Component{
             [2,4,6],
             [0,4,8],
         ];
-        Winner.map(function(v,index){
-          if(squares[v[0]] && squares[v[0]]==squares[v[1]] && squares[v[0]]==squares[v[2]] ){
-            this.gameOver = true;  
-            return squares[v[0]] + ' Won';     
+        Winner.map((v)=>{
+          if(squares[v[0]] && squares[v[0]]===squares[v[1]] && squares[v[0]]===squares[v[2]] ){
+            
+            w= squares[v[0]]==='X'?1:2;
           }
+          //return null; 
         },this)
-        return 'Next Turn: ';       
+        return w;      
     }
 
-    WinnerInfo()
-    {
-        this.calculateWinner();
+    info() {
+            
+            if(this.state.gameOver==0)
+            {
+                return <div> next turn { this.state.chance?"X":"O" }</div>
+            }
+            else
+            {
+                return <div> Winner: {this.state.gameOver==1?"X":"0"}</div>
+            }
+            
     }
 
     render(){
@@ -75,31 +91,28 @@ class Game extends React.Component{
                 { squares.map(function(val,index) {
                     
                     if(index%3 === 2)  
-                    return( 
-                    <div className="row" key={index}>
-                        <Square 
-                        onClick={()=>this.handleclick(index)}
-                         value={squares[index]}
-                         key={index}
-                         />
-                        
-                    </div>
-                    );
+                        return( 
+                        <div className="row" key={index}>
+                            <Square 
+                            onClick={()=>{this.handleclick(index)}}
+                            value={squares[index]}
+                            key={index}
+                            />
+                            
+                        </div>
+                        );
                     return (
                     <div key={index}>
                         <Square 
-                        onClick={()=>this.handleclick(index)}
+                        onClick={()=>{this.handleclick(index)}}
                          value={squares[index]}
                          key={index}
                          /> 
                     </div>
                     );
                 },this) }
-           </div>
-           <div>
-               {this.calculateWinner()}
-           </div>
-        
+           </div> 
+           {this.info()}
 
             </React.Fragment>
         );
@@ -107,8 +120,3 @@ class Game extends React.Component{
 }
 
 export default Game;
-/*
-1. square component = squarebutton banana hai , 
-2. Board Component = collection of square , pass index from board to square,
-3. fill  
-*/
