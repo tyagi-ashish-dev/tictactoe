@@ -1,18 +1,82 @@
-.square{
-  background-color: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -2px;
-  margin-top: -2px;
-  padding: 0;
-  text-align: center;
-  width: 50px;
-  height: 50px;
-}
+@import url('https://fonts.googleapis.com/css2?family=Mukta&family=Shizuru&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne+Tactile&display=swap');
+
 .row{
-  height: 50px;
+  height: 15vh;
+  justify-content: center;
+}
+
+.mainBoard{
+    width: 50vw;
+    height: 50vh;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: stretch;
+    grid-template-columns: repeat(3, auto);
+}
+
+.title{
+  font-family: 'Mukta', sans-serif;
+  color: #fff;
+  font-size: 70px;
+  background-color: #619d9f;
+}
+
+.info{
+  font-size: 30px;
+  color: #fff;
+}
+
+.reset{
+  margin-top: 25px;
+  background-color: #02848a;
+  border-color: #02848a;
+  border: 0px;
+  color: whitesmoke;
+  padding: 14px 140px;
+  font-size: 16px;
+}
+
+.reset:hover {
+  box-shadow: rgba(0,0,0,0.5) 2px 2px 8px;
+}
+
+.winner{
+  animation: inAnimation 500ms ease-in infinite;
+}
+
+@keyframes inAnimation {
+  0% {
+    opacity: 1;
+    font-size:25px;
+    visibility: hidden;
+  }
+  50% {
+    font-size:26px;
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 1;
+    font-size:25px;
+    visibility: hidden;
+  }
+
+}
+
+.player-symbol{
+  font-family: 'Syne Tactile';
+  font-size:32px;
+}
+
+
+hr{
+  border: none;
+  border-top: 1px dotted #c8b264;
+  color: #fff;
+  background-color: #619d9f;
+  height: 1px;
+  width: 50%;
 }

@@ -40,8 +40,8 @@ class Game extends React.Component{
        if(winner>0)
        {
            this.setState(
-               {gameOver:winner}
-               ); 
+                {gameOver:winner}
+            ); 
         }
 
     }
@@ -62,32 +62,60 @@ class Game extends React.Component{
         ];
         Winner.map((v)=>{
           if(squares[v[0]] && squares[v[0]]===squares[v[1]] && squares[v[0]]===squares[v[2]] ){
-            
-            w= squares[v[0]]==='X'?1:2;
+             w= squares[v[0]]==='X'?1:2;
           }
           //return null; 
         },this)
         return w;      
     }
 
+    reset() {
+        this.setState(
+            {
+                squares: Array(9).fill(null),
+                chance: true,
+                gameOver: 0
+            }
+        );
+    }
+
     info() {
             
-            if(this.state.gameOver==0)
+            if(this.state.gameOver===0)
             {
-                return <div> next turn { this.state.chance?"X":"O" }</div>
+                return (<div className="info"> Player: 
+                            <span className={"player-symbol " + (this.state.chance?'dark-symbol':'')}> 
+                            {this.state.chance?" X":"O"}
+                            </span>
+                        </div>);
             }
             else
             {
-                return <div> Winner: {this.state.gameOver==1?"X":"0"}</div>
+                return(
+                    <div className="info"> 
+                       <div className="winner"> 
+                        <span className="player-symbol"> {this.state.gameOver===1?"X":"O"}</span> WINS!!
+                       </div> 
+                        <button className='reset' onClick={()=>this.reset()}>RESET</button>
+                    </div>
+                )
+
             }
             
     }
-
+    
     render(){
         const squares = this.state.squares;
+        const chance = this.state.chance;
         return (
-            <React.Fragment>
-           <div>
+        <center>
+           
+           <div className="title">
+                TIC-TAC-TOE
+           </div>
+           <hr></hr>
+           
+           <div className="mainBoard">
                 { squares.map(function(val,index) {
                     
                     if(index%3 === 2)  
@@ -96,6 +124,7 @@ class Game extends React.Component{
                             <Square 
                             onClick={()=>{this.handleclick(index)}}
                             value={squares[index]}
+                            chance={chance}
                             key={index}
                             />
                             
@@ -106,17 +135,20 @@ class Game extends React.Component{
                         <Square 
                         onClick={()=>{this.handleclick(index)}}
                          value={squares[index]}
+                         chance={chance}
                          key={index}
                          /> 
                     </div>
                     );
                 },this) }
            </div> 
-           {this.info()}
-
-            </React.Fragment>
+           
+           <div ><br/>
+               {this.info()}
+            </div>
+           
+        </center>
         );
     }
 }
-
 export default Game;

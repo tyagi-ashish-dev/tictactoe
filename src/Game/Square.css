@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Shizuru&display=swap');
+
+.square{
+    color: white; 
+    background-color: #619d9f;
+    border: 5px solid #c8b264;
+    font-size: 72px;
+    font-weight: bold;
+    line-height: 100px;
+    margin-right: -2px;
+    margin-top: -2px;
+    padding: 0;
+    text-align: center;
+    width: 15vh;
+    height: 15vh;
+    font-family: 'Syne Tactile', cursive;
+  }  
+  .dark-symbol {
+    color:#026165;
+  }
+  .mainBoard>div:nth-child(1)>button{
+    border-top:none;
+    border-left:none;
+  }
+  .mainBoard>div:nth-child(2)>button{
+    border-top: none;
+    border-left:none;
+  }
+  .mainBoard>div:nth-child(3)>button{
+    border-top: none;
+    border-left:none;
+    border-right:none;
+  }
+  .mainBoard>div:nth-child(4)>button{
+    border-top:none;
+    border-left:none;
+  }
+  .mainBoard>div:nth-child(5)>button{
+    border-top: none;
+    border-left:none;
+  }
+  .mainBoard>div:nth-child(6)>button{
+    border-top: none;
+    border-left:none;
+    border-right:none;
+  }
+  .mainBoard>div:nth-child(7)>button{
+    border-bottom: none;
+    border-left:none;
+    border-top:none;
+  }
+  .mainBoard>div:nth-child(8)>button{
+    border-top: none;
+    border-left:none;
+    border-bottom:none;
+  }
+  .mainBoard>div:nth-child(9)>button{
+    border-top: none;
+    border-right:none;
+    border-bottom:none;
+    border-left:none;
+  }
