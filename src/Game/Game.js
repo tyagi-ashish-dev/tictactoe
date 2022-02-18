@@ -37,17 +37,22 @@ class Game extends React.Component{
        }
 
        let winner = this.calculateWinner();
-       if(winner>0)
-       {
+       if(winner>0){
            this.setState(
                 {gameOver:winner}
             ); 
         }
 
+        else if(winner===0 && (squares.filter(val=>val===null).length)===0){
+            this.setState(
+                {gameOver: -1}
+            );
+            console.log();
+        }
+
     }
    
     calculateWinner=()=>{
-
         const squares = this.state.squares;
         var w = 0;
         const Winner = [
@@ -62,7 +67,7 @@ class Game extends React.Component{
         ];
         Winner.map((v)=>{
           if(squares[v[0]] && squares[v[0]]===squares[v[1]] && squares[v[0]]===squares[v[2]] ){
-             w= squares[v[0]]==='X'?1:2;
+            w= squares[v[0]]==='X'?1:2;
           }
           //return null; 
         },this)
@@ -81,26 +86,37 @@ class Game extends React.Component{
 
     info() {
             
-            if(this.state.gameOver===0)
-            {
-                return (<div className="info"> Player: 
-                            <span className={"player-symbol " + (this.state.chance?'dark-symbol':'')}> 
-                            {this.state.chance?" X":"O"}
-                            </span>
-                        </div>);
-            }
-            else
-            {
-                return(
-                    <div className="info"> 
-                       <div className="winner"> 
-                        <span className="player-symbol"> {this.state.gameOver===1?"X":"O"}</span> WINS!!
-                       </div> 
-                        <button className='reset' onClick={()=>this.reset()}>RESET</button>
-                    </div>
-                )
+        if(this.state.gameOver===0)
+        {   return(
+                <div className="info"> Player: 
+                    <span className={"player-symbol " + (this.state.chance?'dark-symbol':'')}> 
+                        {this.state.chance?"X":"O"}
+                    </span>
+                </div>
+            );
+        }
+        else if(this.state.gameOver===-1){
+            return(
+                <div className="winner">
+                    <div className="winnner">MATCH DRAW!</div>
+                    <button className='reset' onClick={()=>this.reset()}>RESET</button>
+                </div>
+            );
+        }
+        else
+        {
+            return(
+                <div className="info"> 
+                    <div className="winner"> 
+                        <span className={"player-symbol " + (this.state.gameOver===1?'dark-symbol':'')}> 
+                            {this.state.gameOver===1?"X":"O"}
+                        </span>  WON!!
+                    </div> 
+                    <button className='reset' onClick={()=>this.reset()}>RESET</button>
+                </div>
+            )
 
-            }
+        }
             
     }
     
